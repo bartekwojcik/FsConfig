@@ -45,6 +45,23 @@ module ``App Config tests`` =
         } |> Ok
       test <@ appConfig.Get<Config> () = expected  @>
 
+    [<Test>]
+    member __.``optional subsection should succeed`` () =
+        let expected = 
+          {
+            ConfigWithOptionalSubsection.MagicNumber = 42
+            Aws = Some {
+              AccessKeyId = "Id-123"
+              DefaultRegion = "us-east-1"
+              SecretAccessKey = "secret123"
+            }
+          } |> Ok
+
+        let optionalConfig = appConfig.Get<ConfigWithOptionalSubsection> ()
+
+        test <@ optionalConfig = expected  @>
+
+
 
     [<Test>]
     member __.``get list of DU with custom name`` () =

@@ -107,6 +107,11 @@ module Common =
     Aws : AwsConfig
   }
 
+  type ConfigWithOptionalSubsection = {
+    MagicNumber : int
+    Aws : AwsConfig option
+   }
+
   [<Convention("MYAPP")>]
   type ConfigWithCustomPrefix = {
     MagicNumber : int
